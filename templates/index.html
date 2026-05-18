@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        AI Face Recognition Attendance
+    </title>
+
+    <style>
+
+        *{
+            margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;
+        }
+
+        body{
+
+            background:#020617;color:white;width:100vw;height:100vh;overflow:hidden;
+        }
+
+        .container{
+
+            display:flex;width:100%;height:100vh;
+        }
+
+
+        .left-panel{
+
+            width:260px;background:#0f172a;padding:20px;display:flex;flex-direction:column;gap:20px;
+        }
+
+        .logo{
+
+            font-size:30px;font-weight:bold;color:#38bdf8;text-align:center;margin-top:10px;
+        }
+
+        .card{
+
+            background:#111827;border-radius:18px;padding:25px; text-align:center;
+        }
+
+        .card h1{
+
+            font-size:40px;color:#38bdf8;
+        }
+
+        .card p{
+
+            margin-top:8px;color:#cbd5e1;font-size:16px;
+        }
+
+        .center-panel{
+
+            flex:1;padding:20px;display:flex;flex-direction:column;
+        }
+
+        .title{
+
+            font-size:34px;font-weight:bold;margin-bottom:20px;color:white;
+        }
+
+        .video-container{
+
+            flex:1;background:#0f172a;border-radius:20px;overflow:hidden;border:4px solid #2563eb;display:flex;justify-content:center;align-items:center;
+        }
+
+        .video-container img{
+
+            width:100%;height:100%;object-fit:cover;
+        }
+
+        
+        .right-panel{
+
+            width:360px;background:#0f172a;padding:20px;display:flex;flex-direction:column;
+        }
+
+        .attendance-title{
+
+            font-size:28px;font-weight:bold;margin-bottom:20px;color:#38bdf8;
+        }
+
+        .attendance-box{
+
+            flex:1;background:#111827;border-radius:18px;padding:15px;overflow-y:auto;
+        }
+
+        table{
+
+            width:100%;border-collapse:collapse;
+        }
+
+        th{
+
+            text-align:left;padding:12px;background:#1e293b;font-size:15px;
+        }
+
+        td{
+
+            padding:12px;border-bottom:1px solid #1e293b;font-size:14px;
+        }
+
+        tr:hover{
+
+            background:#1e293b;
+        }
+
+        .status{
+
+            margin-top:15px;background:#052e16;color:#4ade80;padding:14px;border-radius:12px;text-align:center;font-weight:bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="left-panel">
+
+            <div class="logo">
+
+                Attendance
+
+            </div>
+
+            <div class="card">
+
+                <h1>
+                    {{ registered_count }}
+                </h1>
+
+                <p>
+                    Total Registrations
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h1>
+                    {{ face_count }}
+                </h1>
+
+                <p>
+                    Faces Detecting
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h1>
+                    LIVE
+                </h1>
+
+                <p>
+                    Recognition Running
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="center-panel">
+
+            <div class="title">
+
+                LIVE FACE RECOGNITION
+
+            </div>
+
+            <div class="video-container">
+
+                <img src="{{ url_for('video') }}">
+
+            </div>
+
+        </div>
+
+        <div class="right-panel">
+
+            <div class="attendance-title">
+
+                Today's Attendance
+
+            </div>
+
+            <div class="attendance-box">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for person in attendance %}
+
+                        <tr>
+
+                            <td>{{ person[0] }}</td>
+                            <td>{{ person[1] }}</td>
+                            <td>{{ person[2] }}</td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="status">
+
+                ● Attendance Monitoring Active
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        setInterval(() => {
+
+            location.reload();
+
+        }, 3000);
+
+    </script>
+
+</body>
+
+</html>
